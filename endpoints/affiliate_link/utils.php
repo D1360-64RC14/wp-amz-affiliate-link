@@ -1,6 +1,7 @@
 <?php
 
 const REGEXP_DP_PATH = '/^\/.*\/dp\/(?P<asin>[A-Z\d]*)\/?(\/ref=.*)?$/';
+const REGEXP_DP_PATH2 = '/^\/dp\/(?P<asin>[A-Z\d]*)\/?/';
 const REGEXP_GP_PATH = '/^\/gp\/product\/(?P<asin>[A-Z\d]*)\/?$/';
 const REGEXP_AMZ_HOST = '/^(www\.)?amazon\.com(\.\w*)?$/';
 
@@ -47,8 +48,12 @@ function extractAsinFromPath(string $path): string {
         return $gp_group_matches['asin'];
     }
 
-    preg_match(REGEXP_DP_PATH, $path, $dp_group_matches);
-    return $dp_group_matches['asin'];
+    if (preg_match(REGEXP_DP_PATH, $path, $dp_group_matches)) {
+        return $dp_group_matches['asin'];
+    }
+
+    preg_match(REGEXP_DP_PATH2, $path, $dp2_group_matches);
+    return $dp2_group_matches['asin'];
 }
 
 /**
@@ -95,26 +100,19 @@ function sanitizeUrlPath(string &$path) {
  * @return void
  */
 function activateAffiliateUrl(array $generated_object) {
-    $res = wp_remote_get(
-        'https://fls-na.amazon.com/1/assoc-links/1/OP/' . json_encode($generated_object),
-        [
-            'headers' => [
-                'accept' => 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-                'accept-language' => 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-                'sec-fetch-dest' => 'image',
-                'sec-fetch-mode' => 'no-cors',
-                'sec-fetch-site' => 'cross-site',
-                'Referer' => 'https://www.amazon.com.br/',
-                'Referrer-Policy' => 'strict-origin-when-cross-origin',
-            ],
-        ]
-    );
+    wp_remote_get('https://fls-na.amazon.com/1/assoc-links/1/OP/' . json_encode($generated_object), [
+        'headers' => [
+            'accept' => 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+            'accept-language' => 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+            'sec-fetch-dest' => 'image',
+            'sec-fetch-mode' => 'no-cors',
+            'sec-fetch-site' => 'cross-site',
+            'Referer' => 'https://www.amazon.com.br/',
+            'Referrer-Policy' => 'strict-origin-when-cross-origin',
+        ],
+    ]);
 
-    $status_code = $res['response']['code'];
-
-    if ($status_code == 200) {
-        return;
-    }
+    // Não está sendo mostrado mensagem de erro caso esse request falhe.
 }
 
 /**

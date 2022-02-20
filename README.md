@@ -50,6 +50,7 @@ Os seguintes exemplos de URL de produto da Amazon são válidas:
 - https://www.amazon.com.br/gp/product/B08C1K6LB2
 - https://www.amazon.com.br/Echo-Dot-3ª-Geração-Cor-Preta/dp/B07PDHSJ1H
 - https://www.amazon.com.br/Echo-Dot-3ª-Geração-Cor-Preta/dp/B07PDHSJ1H/ref=p13n_ds_purchase_sim_1p_dp_desktop_5/130-1374962-7819459
+- https://www.amazon.com.br/dp/B09FTLKBGX
 
 Com destaque no protocolo `https://` e hostname `amazon.com` que são obirgatórios.
 
@@ -58,10 +59,21 @@ Qualquer outro parâmetro que vier junto do link do produto será passado para f
 ## Instalação
 
 1. Copie o atual diretório `wp-amz-affiliate-link` para `wp-content/plugins/` do seu WordPress;
-2. Edite o arquivo `affiliate_link.php` e insira sua tag de afiliado na linha 54 seguindo o exemplo comentado nas linhas anteriores;
+2. Edite o arquivo `affiliate_link.php` e insira sua tag de afiliado na constante `AFFILIATE_TAG` seguindo o exemplo comentado nas linhas anteriores;
 3. Ative o plugin no painel *Plugins* de seu WordPress;
 4. Verifique se em *Configurações > Links permanentes > Configurações comuns*, a opção *Padrão* **NÃO** está selecionada.
 Se a mesma estiver, não será possível acessar a rota `/wp-json/`.
+
+#### Exemplo do passo 2.
+```php
+/**
+ * Tag de afiliado.
+ * Caso esteja vazia, o parâmetro de URL 'tag' será obrigatório.
+ * Exemplo:
+ * const AFFILIATE_TAG = 'example-tag-20';
+ */
+const AFFILIATE_TAG = 'someone-20';
+```
 
 #### Importante
 No item 2, caso você deixe o campo da tag de afiliado em branco, a mesma será obrigatória na requisição.

@@ -27,7 +27,8 @@ function validate_product_url(string $product_url) {
 
     if (
         !preg_match(REGEXP_DP_PATH, $parsed_url['path']) &&
-        !preg_match(REGEXP_GP_PATH, $parsed_url['path'])
+        !preg_match(REGEXP_GP_PATH, $parsed_url['path']) &&
+        !preg_match(REGEXP_DP_PATH2, $parsed_url['path'])
     ) {
         throw new ProductURLError('Path de produto inválido. Deve ser um produto da Amazon');
     }

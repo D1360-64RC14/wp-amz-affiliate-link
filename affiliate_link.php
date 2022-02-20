@@ -11,6 +11,7 @@
  * - https://www.amazon.com.br/gp/product/B08C1K6LB2
  * - https://www.amazon.com.br/Echo-Dot-3ª-Geração-Cor-Preta/dp/B07PDHSJ1H
  * - https://www.amazon.com.br/Echo-Dot-3ª-Geração-Cor-Preta/dp/B07PDHSJ1H/ref=p13n_ds_purchase_sim_1p_dp_desktop_5/130-1374962-7819459
+ * - https://www.amazon.com.br/dp/B09FTLKBGX
  *
  * --- Documentação da API ---
  * Método: GET
@@ -24,8 +25,8 @@
  * --- Exemplos de Uso ---
  * /wp-json/api/v1/affiliate-link?url=https%3A%2F%2Fwww.amazon.com.br%2Fgp%2Fproduct%2FB08C1K6LB2
  * /wp-json/api/v1/affiliate-link?url=https%3A%2F%2Fwww.amazon.com.br%2Fgp%2Fproduct%2FB08C1K6LB2&simple
- * /wp-json/api/v1/affiliate-link?url=https%3A%2F%2Fwww.amazon.com.br%2Fgp%2Fproduct%2FB08C1K6LB2&tag=newsinside0d-20
- * /wp-json/api/v1/affiliate-link?url=https%3A%2F%2Fwww.amazon.com.br%2Fgp%2Fproduct%2FB08C1K6LB2&tag=newsinside0d-20&simple
+ * /wp-json/api/v1/affiliate-link?url=https%3A%2F%2Fwww.amazon.com.br%2Fgp%2Fproduct%2FB08C1K6LB2&tag=example-tag-20
+ * /wp-json/api/v1/affiliate-link?url=https%3A%2F%2Fwww.amazon.com.br%2Fgp%2Fproduct%2FB08C1K6LB2&tag=example-tag-20&simple
  *
  * @package Affiliate_link
  *
