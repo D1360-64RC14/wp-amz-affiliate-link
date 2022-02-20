@@ -1,0 +1,7 @@
+{
+    "parser": "php",
+    "singleQuote": true,
+    "tabWidth": 4,
+    "braceStyle": "1tbs",
+    "printWidth": 105
+}

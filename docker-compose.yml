@@ -1,0 +1,36 @@
+# Container para testes manuais.
+# Será realizado um bind do diretório atual no
+# diretório wp-content/plugins/affiliate-link do wordpress.
+
+services:
+    wordpress:
+        image: wordpress:apache
+        ports:
+            - '8080:80'
+        volumes:
+            - 'wordpress-data:/var/www/html'
+            - type: bind
+              source: ./
+              target: /var/www/html/wp-content/plugins/affiliate-link
+        depends_on:
+            - mysql
+        environment:
+            WORDPRESS_DB_NAME: wordpress
+            WORDPRESS_DB_USER: db_user
+            WORDPRESS_DB_PASSWORD: db_password
+            WORDPRESS_DB_HOST: mysql
+            WORDPRESS_DEBUG: 1
+
+    mysql:
+        image: mysql
+        volumes:
+            - 'mysql-data:/var/lib/mysql'
+        environment:
+            MYSQL_ROOT_PASSWORD: db_root_password
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: db_user
+            MYSQL_PASSWORD: db_password
+
+volumes:
+    wordpress-data:
+    mysql-data:
