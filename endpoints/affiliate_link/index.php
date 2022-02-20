@@ -38,7 +38,7 @@ function get_affiliate_link(WP_REST_Request $request) {
     $product_url = parse_url($url_params['url']);
 
     if (!isset($product_url['query'])) {
-        $product_url['query'] = [];
+        $product_url['query'] = '';
     }
     parse_str($product_url['query'], $product_url['query']);
 
